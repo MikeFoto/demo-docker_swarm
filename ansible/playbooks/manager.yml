@@ -1,0 +1,14 @@
+#
+# Setup
+- hosts: all
+  tasks:
+    - name: Gather Facts
+      setup:
+
+#
+# Provision
+#- hosts: ldap_servers
+  #roles:
+     #- openldap_server
+     #- { role: ldaps , r_ldaps_dataload: False }
+#
