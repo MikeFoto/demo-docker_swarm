@@ -1,0 +1,44 @@
+# local_environment group_vars
+
+# Inventory Description
+# Single  elk Host
+#   nginx->kibana->elastic
+#   logstash->elastic
+
+# external -> logstash : ipaddress:{{ logstash.port }}
+# external -> nginx : http://ipaddress:{{ nginx_virtual.kibana.port }}/{{ nginx_virtual.kibana.location }}
+# external -> jenkins : http://ipaddress:{{ jenkins_port  }}/{{ nginx_virtual.kibana.location }}
+# external -> gerrit :
+
+################################################################################
+# Roles Configuration
+################################################################################
+
+################################################################################
+#  base Role
+base:
+  configuration:
+    # repo_base_url:  "http://{{ endpoints.repo.server_name }}/" # if not defined
+    #                                                            # will not be
+    #                                                            # used
+  command_tests:
+    - {
+        name:        "dummy test",
+        become_user: "root",
+        command:     "echo"
+      }
+
+# END base Role
+################################################################################
+################################################################################
+#  firewall Role
+firewall:
+  configuration:
+    input_tcp_ports:
+      - { zone: "public", protocol: "tcp", port: "22"}
+# END firewall Role
+################################################################################
+
+################################################################################
+# END roles Configuration
+################################################################################

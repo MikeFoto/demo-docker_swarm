@@ -7,8 +7,15 @@
 
 #
 # Provision
-#- hosts: ldap_servers
-  #roles:
-     #- openldap_server
-     #- { role: ldaps , r_ldaps_dataload: False }
-#
+- hosts: manager_group
+  roles:
+     - base
+     - { role: firewalld,
+         extra_ports : [
+           { zone: "public", protocol: "tcp", port: "2377"},
+           { zone: "public", protocol: "tcp", port: "7946"},
+           { zone: "public", protocol: "udp", port: "7946"},
+           { zone: "public", protocol: "udp", port: "4789"}
+         ]
+        }
+     - docker_ce_centos

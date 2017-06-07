@@ -2,7 +2,7 @@ Vagrant.configure(2) do |config|
   ####################################################################################
   # server
   config.vm.define "manager"  do |manager|
-    manager.vm.box = "centos/6"
+    manager.vm.box = "centos/7"
     config.vm.network "public_network", bridge: "wlan0"
     config.vm.provider "virtualbox" do |v|
       v.memory = 1024
@@ -11,8 +11,9 @@ Vagrant.configure(2) do |config|
     config.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/manager.yml"
       ansible.groups = {
-        "manager_group"    => ["manager"] ,
-        "worker_servers"   => ["worker1,worker2"] ,
+        "local_environment" => ["manager","worker1","worker2"] ,
+        "manager_group"     => ["manager"] ,
+        "worker_servers"    => ["worker1,worker2"] ,
       }
       ansible.sudo     = true
     end
@@ -20,7 +21,7 @@ Vagrant.configure(2) do |config|
   ####################################################################################
   # worker1
   config.vm.define "worker1"  do |worker1|
-    worker1.vm.box = "centos/6"
+    worker1.vm.box = "centos/7"
     config.vm.network "public_network", bridge: "wlan0"
     config.vm.provider "virtualbox" do |v|
       v.memory = 1024
