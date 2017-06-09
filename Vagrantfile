@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
       v.cpus = 1
     end
     config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "ansible/playbooks/manager.yml"
+      ansible.playbook = "ansible/playbooks/swarm.yml"
        ansible.extra_vars = {
          swarn_manager_ip: "192.168.33.20",
          hosts_additional_hosts: [
@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
       v.cpus = 1
     end
     config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "ansible/playbooks/worker.yml"
+      ansible.playbook = "ansible/playbooks/swarm.yml"
       ansible.extra_vars = {
          swarn_manager_ip: "192.168.33.20",
          hosts_additional_hosts: [
@@ -66,7 +66,7 @@ Vagrant.configure(2) do |config|
       v.cpus = 1
     end
     config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "ansible/playbooks/worker.yml"
+      ansible.playbook = "ansible/playbooks/swarm.yml"
       ansible.extra_vars = {
          swarn_manager_ip: "192.168.33.20",
          hosts_additional_hosts: [
