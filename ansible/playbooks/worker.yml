@@ -10,6 +10,7 @@
 - hosts:
     - worker_servers
   roles:
+     - { role: ajsalminen.hosts } 
      - base
      - { role: firewalld,
          extra_ports : [
