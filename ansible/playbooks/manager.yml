@@ -10,6 +10,7 @@
 - hosts:
     - manager_group
   roles:
+     - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
      - base
      - { role: firewalld,
          extra_ports : [
