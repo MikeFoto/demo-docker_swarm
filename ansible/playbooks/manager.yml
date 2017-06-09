@@ -7,7 +7,8 @@
 
 #
 # Provision
-- hosts: manager_group
+- hosts:
+    - manager_group
   roles:
      - base
      - { role: firewalld,
@@ -18,4 +19,10 @@
            { zone: "public", protocol: "udp", port: "4789"}
          ]
         }
-     - docker_ce_centos
+     - docker_ce_centos_install
+     - docker_swarn_manager
+
+#
+# docker swarm join \
+#     --token SWMTKN-1-4lfb5ze8opt0x5nb8wmlnv0demh4cmfr4eba23bkuekxojikk6-2xp1hir8jwy9w9qyzu4qy0gze
+#     192.168.33.20:2377

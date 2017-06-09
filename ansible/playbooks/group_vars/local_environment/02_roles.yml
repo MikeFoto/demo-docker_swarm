@@ -35,7 +35,7 @@ base:
 firewall:
   configuration:
     input_tcp_ports:
-      - { zone: "public", protocol: "tcp", port: "22"}
+      - { zone: "public", protocol: "tcp", port: "22"} # ensure ssh is open
 # END firewall Role
 ################################################################################
 
