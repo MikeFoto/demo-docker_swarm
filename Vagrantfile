@@ -3,8 +3,8 @@ Vagrant.configure(2) do |config|
   # server
   config.vm.define "manager"  do |manager|
     manager.vm.box = "centos/7"
-    config.vm.network "public_network", bridge: "wlan0"
     config.vm.network "private_network", ip: "192.168.33.20"
+    config.vm.hostname = "manager.swarm"
     config.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
@@ -26,8 +26,8 @@ Vagrant.configure(2) do |config|
   # worker1
   config.vm.define "worker1"  do |worker1|
     worker1.vm.box = "centos/7"
-    config.vm.network "public_network", bridge: "wlan0"
     config.vm.network "private_network", ip: "192.168.33.31"
+    config.vm.hostname = "worker1.swarm"
     config.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
@@ -45,9 +45,9 @@ Vagrant.configure(2) do |config|
   ####################################################################################
   # server
   config.vm.define "worker2"  do |worker2|
-    worker2.vm.box = "centos/6"
-    config.vm.network "public_network", bridge: "wlan0"
+    worker2.vm.box = "centos/7"
     config.vm.network "private_network", ip: "192.168.33.32"
+    config.vm.hostname = "worker2.swarm"
     config.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
