@@ -3,13 +3,13 @@ Vagrant.configure(2) do |config|
   # server
   config.vm.define "manager"  do |manager|
     manager.vm.box = "centos/7"
-    config.vm.network "private_network", ip: "192.168.33.20"
-    config.vm.hostname = "manager.swarm"
-    config.vm.provider "virtualbox" do |v|
+    manager.vm.network "private_network", ip: "192.168.33.20"
+    manager.vm.hostname = "manager.swarm"
+    manager.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
     end
-    config.vm.provision "ansible" do |ansible|
+    manager.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/swarm.yml"
        ansible.extra_vars = {
          swarn_manager_ip: "192.168.33.20",
@@ -31,13 +31,13 @@ Vagrant.configure(2) do |config|
   # worker1
   config.vm.define "worker1"  do |worker1|
     worker1.vm.box = "centos/7"
-    config.vm.network "private_network", ip: "192.168.33.31"
-    config.vm.hostname = "worker1.swarm"
-    config.vm.provider "virtualbox" do |v|
+    worker1.vm.network "private_network", ip: "192.168.33.31"
+    worker1.vm.hostname = "worker1.swarm"
+    worker1.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
     end
-    config.vm.provision "ansible" do |ansible|
+    worker1.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/swarm.yml"
       ansible.extra_vars = {
          swarn_manager_ip: "192.168.33.20",
@@ -59,13 +59,13 @@ Vagrant.configure(2) do |config|
   # server
   config.vm.define "worker2"  do |worker2|
     worker2.vm.box = "centos/7"
-    config.vm.network "private_network", ip: "192.168.33.32"
-    config.vm.hostname = "worker2.swarm"
-    config.vm.provider "virtualbox" do |v|
+    worker2.vm.network "private_network", ip: "192.168.33.32"
+    worker2.vm.hostname = "worker2.swarm"
+    worker2.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
     end
-    config.vm.provision "ansible" do |ansible|
+    worker2.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/swarm.yml"
       ansible.extra_vars = {
          swarn_manager_ip: "192.168.33.20",
