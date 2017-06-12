@@ -12,11 +12,11 @@ Vagrant.configure(2) do |config|
     manager.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/swarm.yml"
        ansible.extra_vars = {
-         swarn_manager_ip: "192.168.33.20",
+         swarm_manager_ip: "192.168.33.20",
          hosts_additional_hosts: [
-           { address: "192.168.33.20", hostnames: [ "manager","manager.swarm" ] },
-           { address: "192.168.33.31", hostnames: [ "worker1","worker1.swarm" ] },
-           { address: "192.168.33.32", hostnames: [ "worker2","worker2.swarm" ] }
+           { address: "192.168.33.20", hostnames: [ "manager.swarm","manager" ] },
+           { address: "192.168.33.31", hostnames: [ "worker1.swarm","worker1" ] },
+           { address: "192.168.33.32", hostnames: [ "worker2.swarm","worker2" ] }
          ]
        }
       ansible.groups = {
@@ -40,11 +40,12 @@ Vagrant.configure(2) do |config|
     worker1.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/swarm.yml"
       ansible.extra_vars = {
-         swarn_manager_ip: "192.168.33.20",
+         swarm_manager_inventory_name: "manager",
+         swarm_manager_ip: "192.168.33.20",
          hosts_additional_hosts: [
-           { address: "192.168.33.20", hostnames: [ "manager","manager.swarm" ] },
-           { address: "192.168.33.31", hostnames: [ "worker1","worker1.swarm" ] },
-           { address: "192.168.33.32", hostnames: [ "worker2","worker2.swarm" ] }
+           { address: "192.168.33.20", hostnames: [ "manager.swarm","manager" ] },
+           { address: "192.168.33.31", hostnames: [ "worker1.swarm","worker1" ] },
+           { address: "192.168.33.32", hostnames: [ "worker2.swarm","worker2" ] }
          ]
        }
       ansible.groups = {
@@ -68,11 +69,12 @@ Vagrant.configure(2) do |config|
     worker2.vm.provision "ansible" do |ansible|
       ansible.playbook = "ansible/playbooks/swarm.yml"
       ansible.extra_vars = {
-         swarn_manager_ip: "192.168.33.20",
+         swarm_manager_inventory_name: "manager",
+         swarm_manager_ip: "192.168.33.20",
          hosts_additional_hosts: [
-           { address: "192.168.33.20", hostnames: [ "manager","manager.swarm" ] },
-           { address: "192.168.33.31", hostnames: [ "worker1","worker1.swarm" ] },
-           { address: "192.168.33.32", hostnames: [ "worker2","worker2.swarm" ] }
+           { address: "192.168.33.20", hostnames: [ "manager.swarm","manager" ] },
+           { address: "192.168.33.31", hostnames: [ "worker1.swarm","worker1" ] },
+           { address: "192.168.33.32", hostnames: [ "worker2.swarm","worker2" ] }
          ]
        }
       ansible.groups = {

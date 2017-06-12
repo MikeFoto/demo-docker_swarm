@@ -1,9 +1,9 @@
 #
 # Setup
-- hosts: all
-  tasks:
-    - name: Gather Facts
-      setup:
+# - hosts: all
+#   tasks:
+#     - name: Gather Facts
+#       setup:
 #
 # Provision Common
 - hosts:
@@ -27,9 +27,11 @@
 - hosts:
     - manager_group
   roles:
-     - docker_swarn_manager
+     - docker_swarm_manager
 
 #
-# docker swarm join \
-    # --token SWMTKN-1-4lfb5ze8opt0x5nb8wmlnv0demh4cmfr4eba23bkuekxojikk6-2xp1hir8jwy9w9qyzu4qy0gze
-    # 192.168.33.20:2377
+# Provision workers
+- hosts:
+    - worker_servers
+  roles:
+     - docker_swarm_node
