@@ -11,7 +11,8 @@
     - worker_servers
   roles:
      - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
-     - base
+     - repos
+    #  - packages 
      - { role: firewalld,
          extra_ports : [
            { zone: "public", protocol: "tcp", port: "2377"},
