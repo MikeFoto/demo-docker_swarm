@@ -6,23 +6,16 @@
 ################################################################################
 
 ################################################################################
-#  base Role
-base:
-  configuration:
-    # repo_base_url:  "http://{{ endpoints.repo.server_name }}/" # if not defined
-    #                                                            # will not be
-    #                                                            # used
-  install_packages:
+#  packages Role
+packages:
+  upgrade: True
+  remove: []
+    # - "libselinux-python"
+  install:
     - { name: "libselinux-python", state: "latest" }
     - { name: "bind-utils",        state: "latest" }
-  command_tests:
-    - {
-        name:        "dummy test",
-        become_user: "root",
-        command:     "echo"
-      }
 
-# END base Role
+# END packages Role
 ################################################################################
 ################################################################################
 # END roles Configuration
