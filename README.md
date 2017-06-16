@@ -25,7 +25,10 @@ Change to any other provisioner by changing configuration file
 vagrant up
 ```
 
-* Launch defined containers
+* Launch defined services
 ```bash
-# what command
+ansible-playbook  \
+  -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
+   ansible/playbooks/swarm_run.yml 
+
 ```

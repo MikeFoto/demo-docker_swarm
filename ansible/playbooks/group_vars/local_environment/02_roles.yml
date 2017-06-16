@@ -28,5 +28,34 @@ firewalld:
 # END firewalld  Role
 ################################################################################
 ################################################################################
+#  swarm_run Role
+swarm_run:
+  services:
+    start:                              # define services here
+                                        # if the service is running will not
+                                        #   change anything
+      - name:     demo_service_1
+        image:    alpine
+        tag:      latest
+        replicas: 1
+        command:  "ping docker.com"
+      - name:     demo_service_2
+        image:    alpine
+        tag:      latest
+        replicas: 2
+        command:  "ping docker.com"
+      - name:     demo_service_3
+        image:    alpine
+        tag:      latest
+        replicas: 3
+        command:  "ping docker.com"
+
+
+
+
+
+# END swarm_run  Role
+################################################################################
+################################################################################
 # END roles Configuration
 ################################################################################
