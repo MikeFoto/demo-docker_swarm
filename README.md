@@ -20,6 +20,12 @@ Change to any other provisioner by changing configuration file
 
 # Usage
 
+* Create the cluster
 ```bash
 vagrant up
+```
+
+* Launch defined containers
+```bash
+# what command
 ```
