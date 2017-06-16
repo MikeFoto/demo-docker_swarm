@@ -1,11 +1,5 @@
 #
-# Setup
-# - hosts: all
-#   tasks:
-#     - name: Gather Facts
-#       setup:
-#
-# Provision Common
+# Common Provision
 - hosts:
     - manager_group
     - worker_servers
