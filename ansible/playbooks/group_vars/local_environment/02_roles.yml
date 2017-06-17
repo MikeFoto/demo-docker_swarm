@@ -49,6 +49,8 @@ swarm_run:
         tag:      latest
         replicas: 3
         command:  "ping docker.com"
+    remove:                           # Define the servives to be removed 
+      - name:     demo_service_3
 
 
 
