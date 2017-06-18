@@ -1,0 +1,25 @@
+manager1:
+  :ip:          192.168.33.20
+  :enabled:     true
+  :playbook:    swarm.yml
+  :swarm_role:  leader
+manager2:
+  :ip:          192.168.33.21
+  :enabled:     true
+  :playbook:    swarm.yml
+  :swarm_role:  manager
+worker1:
+  :ip:          192.168.33.22
+  :enabled:     true
+  :playbook:    swarm.yml
+  :swarm_role:  worker
+worker2:
+  :ip:          192.168.33.23
+  :enabled:     true
+  :playbook:    swarm.yml
+  :swarm_role:  worker
+worker3:
+  :ip:          192.168.33.24
+  :enabled:     true
+  :playbook:    swarm.yml
+  :swarm_role:  worker

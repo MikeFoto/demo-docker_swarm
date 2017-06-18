@@ -8,7 +8,7 @@
 ################################################################################
 #  packages Role
 packages:
-  upgrade: True
+  upgrade: False
   remove: []
     # - "libselinux-python"
   install:
@@ -61,7 +61,7 @@ swarm_run:
 
 # Examples for service option
   # --replicas 1             Number or replicas in the swarm for the service
-  # --mode global            service in each node of the cluster 
+  # --mode global            service in each node of the cluster
   # --update-delay 10s       how often check for updates
   # --update-parallelism 3   How many concurrent updates
   # -- publicsh 8080:80      expose a port to ouside world and connect local port

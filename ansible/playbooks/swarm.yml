@@ -1,8 +1,8 @@
 #
 # Common Provision
 - hosts:
-    - manager_group
-    - worker_servers
+    - leader_group
+    - others_group
   roles:
      - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
      - repos
@@ -18,15 +18,15 @@
      - docker_ce_centos_install
 
 #
-# Provision Manager
+# Provision leader
 - hosts:
-    - manager_group
+    - leader_group
   roles:
      - docker_swarm_manager
 
 #
-# Provision workers
+# Provision other managers and workers
 - hosts:
-    - worker_servers
+    - others_group
   roles:
      - docker_swarm_node
