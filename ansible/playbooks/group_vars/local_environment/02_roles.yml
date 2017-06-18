@@ -37,24 +37,39 @@ swarm_run:
       - name:     demo_service_1
         image:    alpine
         tag:      latest
-        replicas: 1
         command:  "ping docker.com"
+        options:                             # Any service option can go here
+                                             # see examples bellow
+          --replicas 1
+          --update-delay 10s
+          --update-parallelism 3
       - name:     demo_service_2
         image:    alpine
         tag:      latest
-        replicas: 2
         command:  "ping docker.com"
+        options:                             # Any service option can go here
+          --replicas 3
       - name:     demo_service_3
         image:    alpine
         tag:      latest
-        replicas: 3
+        options:                             # Any service option can go here
+          --replicas 1
         command:  "ping docker.com"
-    remove:                           # Define the servives to be removed 
-      - name:     demo_service_3
+    # remove:                           # Define the servives to be removed
+      # - name:     demo_service_3
 
 
-
-
+# Examples for service option
+  # --replicas 1             Number or replicas in the swarm for the service
+  # --mode global            service in each node of the cluster 
+  # --update-delay 10s       how often check for updates
+  # --update-parallelism 3   How many concurrent updates
+  # -- publicsh 8080:80      expose a port to ouside world and connect local port
+  #                          optional protocol eg:/tcp
+  #                          can be used several times
+  # --env MYVAR=myvalue      set environment variable
+  # --workdir /tmp           set working dir
+  # --user my_user           set user
 
 # END swarm_run  Role
 ################################################################################
