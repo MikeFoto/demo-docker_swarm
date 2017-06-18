@@ -30,6 +30,12 @@ firewalld:
 ################################################################################
 #  swarm_run Role
 swarm_run:
+  volumes:
+    create:                              # define volumes here
+      - name:     demo_volume_1
+        option:   "none"
+      - name:     demo_volume_2
+        option:   "none"
   services:
     start:                              # define services here
                                         # if the service is running will not
@@ -40,6 +46,7 @@ swarm_run:
         command:  "ping docker.com"
         options:                             # Any service option can go here
                                              # see examples bellow
+          --mount type=volume source=demo_volume_1 destination=/tmp
           --replicas 1
           --update-delay 10s
           --update-parallelism 3
@@ -64,12 +71,18 @@ swarm_run:
   # --mode global            service in each node of the cluster
   # --update-delay 10s       how often check for updates
   # --update-parallelism 3   How many concurrent updates
-  # -- publicsh 8080:80      expose a port to ouside world and connect local port
+  # -- publish 8080:80       expose a port to ouside world and connect local port
   #                          optional protocol eg:/tcp
   #                          can be used several times
   # --env MYVAR=myvalue      set environment variable
   # --workdir /tmp           set working dir
   # --user my_user           set user
+  # --mount
+  #     type=volume,
+  #     source=my-volume,
+  #     destination=/path/in/container,
+  #     volume-label="color=red",
+  #     volume-label="shape=round" \
 
 # END swarm_run  Role
 ################################################################################

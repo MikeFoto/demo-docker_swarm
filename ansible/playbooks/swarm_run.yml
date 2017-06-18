@@ -1,7 +1,7 @@
 #
 # Provision Manager
 - hosts:
-    - manager_group
+    - leader_group
   become:  yes
   roles:
      - docker_swarm_run
