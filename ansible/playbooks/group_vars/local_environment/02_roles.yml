@@ -29,7 +29,11 @@ firewalld:
 ################################################################################
 ################################################################################
 #  swarm_run Role
-swarm_run:
+swarm_aux:                              # aux values used in configuration
+  exposed_ports:
+    nginx:         8080
+
+swarm_run1:                              # Generic example
   volumes:
     create:                              # define volumes here
       - name:     demo_volume_1
@@ -46,7 +50,7 @@ swarm_run:
         command:  "ping docker.com"
         options:                             # Any service option can go here
                                              # see examples bellow
-          --mount type=volume source=demo_volume_1 destination=/tmp
+          --mount type=volume,source=demo_volume_1,destination=/tmp
           --replicas 1
           --update-delay 10s
           --update-parallelism 3
@@ -65,6 +69,21 @@ swarm_run:
     # remove:                           # Define the servives to be removed
       # - name:     demo_service_3
 
+swarm_run2:                              # nginx example
+  volumes:
+    create:                              # define volumes here
+      - name:     demo2_volume_1
+        option:   "none"
+  services:
+    start:
+      - name:     demo2_nginx
+        image:    nginx
+        tag:      latest
+        options:
+          --replicas 3
+          --publish {{ swarm_aux.exposed_ports.nginx }}:80       # Access service on 8080 @ any swarm host
+
+swarm_run: "{{ swarm_run2 }}"
 
 # Examples for service option
   # --replicas 1             Number or replicas in the swarm for the service
