@@ -70,6 +70,9 @@ swarm_run1:                              # Generic example
       # - name:     demo_service_3
 
 swarm_run2:                              # nginx example
+  test:
+    - name:    test1
+      command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx }}"
   volumes:
     create:                              # define volumes here
       - name:     demo2_volume_1

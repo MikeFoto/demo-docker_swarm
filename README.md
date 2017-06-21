@@ -29,6 +29,7 @@ vagrant up
 ```bash
 ansible-playbook  \
   -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
-   ansible/playbooks/swarm_run.yml 
+  --extra-vars='swarm_manager_ip=192.168.33.20' \
+   ansible/playbooks/swarm_run.yml
 
 ```
