@@ -15,6 +15,7 @@ packages:
     - { name: "libselinux-python", state: "latest" }
     - { name: "bind-utils",        state: "latest" }
 
+
 # END packages Role
 ################################################################################
 ################################################################################
@@ -31,7 +32,9 @@ firewalld:
 #  swarm_run Role
 swarm_aux:                              # aux values used in configuration
   exposed_ports:
-    nginx:         8080
+    nginx1:         8080
+    nginx2:         8081
+    microservice1:   80
 
 swarm_run1:                              # Generic example
   volumes:
@@ -72,19 +75,66 @@ swarm_run1:                              # Generic example
 swarm_run2:                              # nginx example
   test:
     - name:    test1
-      command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx }}"
+      command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx1 }}"
+    - name:    test2
+      command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx2 }}"
   volumes:
     create:                              # define volumes here
       - name:     demo2_volume_1
         option:   "none"
-  services:
+  services:                               # single service at 8080
     start:
-      - name:     demo2_nginx
+      - name:     demo2_nginx_1
         image:    nginx
         tag:      latest
         options:
           --replicas 3
-          --publish {{ swarm_aux.exposed_ports.nginx }}:80       # Access service on 8080 @ any swarm host
+          --publish {{ swarm_aux.exposed_ports.nginx1 }}:80       # Access service on 8080 @ any swarm host
+      - name:     demo2_nginx_2
+        image:    nginx
+        tag:      latest
+        options:
+          --replicas 3
+          --publish {{ swarm_aux.exposed_ports.nginx2 }}:80       # Access service on 8081 @ any swarm host
+
+swarm_run3:                              # microservice  example
+  # test:                                  # tests that run at the end
+  #   - name:    test1
+  #     command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx }}"
+  volumes:
+    create:                              # define volumes here
+      - name:     demo3_volume_1
+        option:   "none"
+  services:
+    start:
+      - name:     demo3_microservice_1
+        image:    python
+        tag:      latest
+        command: |
+          export LOG=/tmp/log1.txt
+          export PORT=2000
+          export WDIR=/tmp
+          pushd $WDIR
+          python -c "import SimpleHTTPServer
+            import SocketServer
+            import sys
+            PORT = $PORT
+            class MyHTTPHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+              log_file = open('$LOG', 'w')
+              def log_message(self, format, *args):
+                  self.log_file.write('%s - - [%s] %s\n' %
+                            (self.client_address[0],
+                             self.log_date_time_string(),
+                             format%args))
+              Handler = MyHTTPHandler
+              httpd = SocketServer.TCPServer(('', PORT), Handler)
+              print 'serving at port', PORT
+              httpd.serve_forever() "
+          popd
+        options:
+          --replicas 3
+          --publish {{ swarm_aux.exposed_ports.microservice1 }}:2000       # Access service on 8080 @ any swarm host
+
 
 swarm_run: "{{ swarm_run2 }}"
 
