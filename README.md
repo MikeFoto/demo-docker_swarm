@@ -36,3 +36,15 @@ ansible-playbook  \
    ansible/playbooks/swarm_run.yml
 
 ```
+
+# Examples included
+
+## Example1
+* we can define any number of volumes and any option for each volume on *swarm_run.volumes.create*
+* we can defined any number of services
+** with associated images
+** commands to run
+** service options
+
+## Example2
+no documentation for example2 

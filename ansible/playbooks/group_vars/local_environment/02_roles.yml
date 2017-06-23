@@ -30,46 +30,6 @@ firewalld:
 ################################################################################
 ################################################################################
 #  swarm_run Role
-swarm_run_readme: |
-  # Setup a Docker Swarm cluster with 3 nodes
-
-  * Provisioned by ansible
-
-  * Using public ansible roles
-
-  # Notes
-  Current Vagrant file use virtualbox provisioner for demo purposes .
-  Change to any other provisioner by changing configuration file
-
-  # Setup
-
-  * change ansible.cfg to match your local setup
-
-  * ansible_galaxy_roles - external dependencies from other contributors
-  * * hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
-
-  * ansible_roles_public - roles created by myself , available at https://Foto@bitbucket.org/MikeFoto/ansible_roles_public.git
-
-
-  # Usage
-
-  * Create the cluster
-  ```bash
-  vagrant up
-  ```
-
-  * Update the cluster
-  to add nodes just edit the file *hosts.yaml*
-  
-  * Launch defined services
-  ```bash
-  ansible-playbook  \
-    -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
-    --extra-vars='swarm_manager_ip=192.168.33.20' \
-     ansible/playbooks/swarm_run.yml
-
-  ```
-
 
 swarm_aux2:                              # aux values used in configuration
   exposed_ports:
@@ -96,6 +56,12 @@ swarm_aux4:                              # aux values used in configuration
 swarm_aux: "{{ swarm_aux4 }}"
 
 swarm_run1:                              # Generic example
+  documentation: |
+    * we can define any number of volumes and any option for each volume on *swarm_run.volumes.create*
+    * we can defined any number of services
+    ** with associated images
+    ** commands to run
+    ** service options
   volumes:
     create:                              # define volumes here
       - name:     demo_volume_1
@@ -262,6 +228,53 @@ swarm_run: "{{ swarm_run4 }}"
   #     destination=/path/in/container,
   #     volume-label="color=red",
   #     volume-label="shape=round" \
+
+swarm_run_readme: |
+  # Setup a Docker Swarm cluster with 3 nodes
+
+  * Provisioned by ansible
+
+  * Using public ansible roles
+
+  # Notes
+  Current Vagrant file use virtualbox provisioner for demo purposes .
+  Change to any other provisioner by changing configuration file
+
+  # Setup
+
+  * change ansible.cfg to match your local setup
+
+  * ansible_galaxy_roles - external dependencies from other contributors
+  * * hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
+
+  * ansible_roles_public - roles created by myself , available at https://Foto@bitbucket.org/MikeFoto/ansible_roles_public.git
+
+
+  # Usage
+
+  * Create the cluster
+  ```bash
+  vagrant up
+  ```
+
+  * Update the cluster
+  to add nodes just edit the file *hosts.yaml*
+
+  * Launch defined services
+  ```bash
+  ansible-playbook  \
+    -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
+    --extra-vars='swarm_manager_ip=192.168.33.20' \
+     ansible/playbooks/swarm_run.yml
+
+  ```
+
+  # Examples included
+
+  ## Example1
+  {{ swarm_run1.documentation | default ("no documentation for example1 ")}}
+  ## Example2
+  {{ swarm_run2.documentation | default ("no documentation for example2 ")}}
 
 # END swarm_run  Role
 ################################################################################
