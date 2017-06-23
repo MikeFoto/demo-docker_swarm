@@ -30,6 +30,47 @@ firewalld:
 ################################################################################
 ################################################################################
 #  swarm_run Role
+swarm_run_readme: |
+  # Setup a Docker Swarm cluster with 3 nodes
+
+  * Provisioned by ansible
+
+  * Using public ansible roles
+
+  # Notes
+  Current Vagrant file use virtualbox provisioner for demo purposes .
+  Change to any other provisioner by changing configuration file
+
+  # Setup
+
+  * change ansible.cfg to match your local setup
+
+  * ansible_galaxy_roles - external dependencies from other contributors
+  * * hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
+
+  * ansible_roles_public - roles created by myself , available at https://Foto@bitbucket.org/MikeFoto/ansible_roles_public.git
+
+
+  # Usage
+
+  * Create the cluster
+  ```bash
+  vagrant up
+  ```
+
+  * Update the cluster
+  to add nodes just edit the file *hosts.yaml*
+  
+  * Launch defined services
+  ```bash
+  ansible-playbook  \
+    -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
+    --extra-vars='swarm_manager_ip=192.168.33.20' \
+     ansible/playbooks/swarm_run.yml
+
+  ```
+
+
 swarm_aux2:                              # aux values used in configuration
   exposed_ports:
     nginx1:         8080
@@ -192,13 +233,14 @@ swarm_run4:                              # shared volume  example
         tag:      latest
         options:
           --replicas 2
-          --publish {{ swarm_aux.exposed_ports.nginx1 }}:80       # Access service on 8080 @ any swarm host
-      - name:     demo2_nginx_1
+          --publish {{ swarm_aux.exposed_ports.nginx1 }}:80
+          --mount type=volume,source=demo_volume_1,destination=/tmp
+      - name:     demo4_nginx_2
         image:    nginx
         tag:      latest
         options:
           --replicas 2
-          --publish {{ swarm_aux.exposed_ports.nginx2 }}:80       # Access service on 8081 @ any swarm host
+          --publish {{ swarm_aux.exposed_ports.nginx2 }}:80
 
 
 swarm_run: "{{ swarm_run4 }}"

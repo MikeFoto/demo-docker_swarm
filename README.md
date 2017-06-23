@@ -25,6 +25,9 @@ Change to any other provisioner by changing configuration file
 vagrant up
 ```
 
+* Update the cluster
+to add nodes just edit the file *hosts.yaml*
+
 * Launch defined services
 ```bash
 ansible-playbook  \

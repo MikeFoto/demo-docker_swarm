@@ -1,4 +1,16 @@
-#
+
+- hosts: all
+  connection: local
+  become:  no
+  tasks:
+    - name: Create readme
+      copy:
+        dest:    "../../README.md"
+        content: "{{ swarm_run_readme }}"
+      when :
+        swarm_run_readme is defined
+      run_once: true
+
 # Pre run condition for all managers
 - hosts:
     - manager_group
