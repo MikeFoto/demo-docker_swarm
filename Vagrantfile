@@ -56,6 +56,7 @@ Vagrant.configure("2") do |config|
                                   "worker1","worker2","worker3"
                                 ] ,
          "leader_group"      => ["manager1"] ,
+         "manager_group"     => ["manager1","manager2"] ,
          "others_group"      => ["manager2","worker1","worker2","worker3"] ,
        }
       end

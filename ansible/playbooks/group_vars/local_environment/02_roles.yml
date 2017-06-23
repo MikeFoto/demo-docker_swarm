@@ -47,7 +47,12 @@ swarm_aux3:                              # aux values used in configuration
     microservice3:   2020
     microservice4:   2030
 
-swarm_aux: "{{ swarm_aux3 }}"
+swarm_aux4:                              # aux values used in configuration
+  exposed_ports:
+    nginx1:         8080
+    nginx2:         8081
+
+swarm_aux: "{{ swarm_aux4 }}"
 
 swarm_run1:                              # Generic example
   volumes:
@@ -167,7 +172,36 @@ swarm_run3:                              # microservice  example
           --replicas 3
           --publish {{ swarm_aux.exposed_ports.microservice4}}:{{ swarm_aux.internal_ports.microservice4}}
 
-swarm_run: "{{ swarm_run3 }}"
+swarm_run4:                              # shared volume  example
+  preconditions:
+    directories:
+      - "/tmp/lixo"
+  test:
+    - name:    test1
+      command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx1 }}"
+    - name:    test2
+      command: "curl --max-time 1 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.nginx2 }}"
+  volumes:
+    create:                              # define volumes here
+      - name:     demo4_volume_1
+        option:   "none"
+  services:                               # single service at 8080
+    start:
+      - name:     demo4_nginx_1
+        image:    nginx
+        tag:      latest
+        options:
+          --replicas 2
+          --publish {{ swarm_aux.exposed_ports.nginx1 }}:80       # Access service on 8080 @ any swarm host
+      - name:     demo2_nginx_1
+        image:    nginx
+        tag:      latest
+        options:
+          --replicas 2
+          --publish {{ swarm_aux.exposed_ports.nginx2 }}:80       # Access service on 8081 @ any swarm host
+
+
+swarm_run: "{{ swarm_run4 }}"
 
 # Examples for service option
   # --replicas 1             Number or replicas in the swarm for the service

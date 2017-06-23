@@ -1,4 +1,18 @@
 #
+# Pre run condition for all managers
+- hosts:
+    - manager_group
+  become:  yes
+  tasks:
+    - name: setup pre codintions
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ swarm_run.preconditions.directories }}"
+      when:
+        swarm_run.preconditions.directories  is defined
+
 # Provision Manager
 - hosts:
     - leader_group
