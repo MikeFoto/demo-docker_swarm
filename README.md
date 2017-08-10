@@ -1,10 +1,11 @@
-# Setup a Docker Swarm cluster with 3 nodes
+# Setup a Docker Swarm cluster with arbitrary number of  nodes
 
 * Provisioned by ansible
 
 * Using public ansible roles
 
 # Notes
+
 Current Vagrant file use virtualbox provisioner for demo purposes .
 Change to any other provisioner by changing configuration file
 
@@ -12,8 +13,14 @@ Change to any other provisioner by changing configuration file
 
 * change ansible.cfg to match your local setup
 
+* change hosts.yml with your desired configuration . In each node #Cpus, memory and role can be configured
+
+* One private network is used (192.168.33.0/24 ). Change it if conflicts with existing ones.
+
+# Dependencies 
+
 * ansible_galaxy_roles - external dependencies from other contributors
-* * hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
+* hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
 
 * ansible_roles_public - roles created by myself , available at https://Foto@bitbucket.org/MikeFoto/ansible_roles_public.git
 

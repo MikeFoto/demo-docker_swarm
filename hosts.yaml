@@ -3,6 +3,8 @@ manager1:
   :enabled:     true
   :playbook:    swarm.yml
   :swarm_role:  leader
+  :cpu:         1
+  :memory :     1024
 manager2:
   :ip:          192.168.33.21
   :enabled:     true
