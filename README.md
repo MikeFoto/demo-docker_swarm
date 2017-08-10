@@ -47,4 +47,4 @@ ansible-playbook  \
 ** service options
 
 ## Example2
-no documentation for example2 
+on top of example1 we can add tests that will run after all the services where deployed
