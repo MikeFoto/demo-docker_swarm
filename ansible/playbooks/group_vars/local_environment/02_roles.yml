@@ -5,19 +5,19 @@
 # Roles Configuration
 ################################################################################
 
-################################################################################
-#  packages Role
-packages:
-  upgrade: False
-  remove: []
-    # - "libselinux-python"
-  install:
-    - { name: "libselinux-python", state: "latest" }
-    - { name: "bind-utils",        state: "latest" }
-
-
-# END packages Role
-################################################################################
+# ################################################################################
+# #  packages Role
+# packages:
+#   upgrade: False
+#   remove: []
+#     # - "libselinux-python"
+#   install:
+#     - { name: "libselinux-python", state: "latest" }
+#     - { name: "bind-utils",        state: "latest" }
+#
+#
+# # END packages Role
+# ################################################################################
 ################################################################################
 #  firewalld Role
 
