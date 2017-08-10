@@ -30,4 +30,4 @@
     - leader_group
   become:  yes
   roles:
-     - docker_swarm_run
+     - ansible_docker_swarm_run

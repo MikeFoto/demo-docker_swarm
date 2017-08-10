@@ -23,12 +23,12 @@ Change to any other provisioner by changing configuration file
 ** hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
 
 * My public roles
-** repos - git clone https://MikeFoto@bitbucket.org/MikeFoto/repos.git
-** packages - git clone https://MikeFoto@bitbucket.org/MikeFoto/packages.git
-** firewalld - git clone https://MikeFoto@bitbucket.org/MikeFoto/firewalld.git
-** docker_ce_centos_install - git clone https://MikeFoto@bitbucket.org/MikeFoto/docker_ce_centos_install.git
-** docker_swarm_manager - git clone https://MikeFoto@bitbucket.org/MikeFoto/docker_swarm_manager.git
-** docker_swarm_node - git clone https://MikeFoto@bitbucket.org/MikeFoto/docker_swarm_node.git
+** ansible_repos - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_repos.git
+** ansible_packages - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_packages.git
+** ansible_firewalld - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_firewalld.git
+** ansible_docker_ce_centos_install - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_ce_centos_install.git
+** ansible_docker_swarm_manager - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_manager.git
+** ansible_docker_swarm_node - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_node.git
 
 # Usage
 
@@ -48,18 +48,7 @@ ansible-playbook  \
   --extra-vars='swarm_manager_ip=192.168.33.20' \
    ansible/playbooks/swarm_run.yml
 ```
-
-# Examples included
-
-## Example1
-* we can define any number of volumes and any option for each volume on *swarm_run.volumes.create*
-* we can defined any number of services
-** with associated images
-** commands to run
-** service options
-
-## Example2
-on top of example1 we can add tests that will run after all the services where deployed
+All services are defined using ansible_docker_swarm role. Check examples
 
 # License
 

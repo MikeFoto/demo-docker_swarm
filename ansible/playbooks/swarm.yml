@@ -5,9 +5,9 @@
     - others_group
   roles:
      - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
-     - repos
-     - packages
-     - { role: firewalld,
+     - ansible_repos
+     - ansible_packages
+     - { role: ansible_firewalld,
          extra_ports : [
            { zone: "public", protocol: "tcp", port: "2377"},
            { zone: "public", protocol: "tcp", port: "7946"},
@@ -15,18 +15,18 @@
            { zone: "public", protocol: "udp", port: "4789"}
          ]
         }
-     - docker_ce_centos_install
+     - ansible_docker_ce_centos_install
 
 #
 # Provision leader
 - hosts:
     - leader_group
   roles:
-     - docker_swarm_manager
+     - ansible_docker_swarm_manager
 
 #
 # Provision other managers and workers
 - hosts:
     - others_group
   roles:
-     - docker_swarm_node
+     - ansible_docker_swarm_node
