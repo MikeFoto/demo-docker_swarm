@@ -44,10 +44,10 @@ Vagrant.configure("2") do |config|
           swarm_manager_inventory_name: "manager1",
           hosts_additional_hosts: [
             { address: "192.168.33.20", hostnames: [ "manager1.swarm","manager1" ] },
-            { address: "192.168.33.20", hostnames: [ "manager2.swarm","manager2" ] },
-            { address: "192.168.33.31", hostnames: [ "worker1.swarm","worker1" ] },
-            { address: "192.168.33.32", hostnames: [ "worker2.swarm","worker2" ] },
-            { address: "192.168.33.33", hostnames: [ "worker3.swarm","worker3" ] }
+            { address: "192.168.33.21", hostnames: [ "manager2.swarm","manager2" ] },
+            { address: "192.168.33.22", hostnames: [ "worker1.swarm","worker1" ] },
+            { address: "192.168.33.23", hostnames: [ "worker2.swarm","worker2" ] },
+            { address: "192.168.33.24", hostnames: [ "worker3.swarm","worker3" ] }
           ],
           swarm_role: "#{host[:swarm_role]}"
        }
