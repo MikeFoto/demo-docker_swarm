@@ -1,21 +1,46 @@
 
-- hosts: all
-  connection: local
-  become:  no
-  tasks:
-    - name: Create readme
-      copy:
-        dest:    "../../README.md"
-        content: "{{ swarm_run_readme }}"
-      when :
-        swarm_run_readme is defined
-      run_once: true
+# - hosts: all
+#   connection: local
+#   become:  no
+#   tasks:
+#     - name: Create readme
+#       copy:
+#         dest:    "../../README.md"
+#         content: "{{ swarm_run_readme }}"
+#       when :
+#         swarm_run_readme is defined
+#       run_once: true
 
 # Pre run condition for all managers
 - hosts:
     - manager_group
   become:  yes
   tasks:
+    - name: setup pre codintions
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ swarm_run.preconditions.directories }}"
+      when:
+        swarm_run                            is defined and
+        swarm_run.preconditions              is defined and
+        swarm_run.preconditions.directories  is defined
+
+# Pre run condition for Leader
+- hosts:
+    - leader_group
+  become:  yes
+  tasks:
+    - name: Load variables from examples directory
+      fail:
+        msg: "example_number variable must be provided"
+      when:
+        example_number is not defined
+    - name: bare include variables
+      include_vars: "{{ item }}"
+      with_items:
+        - "examples/example{{ example_number }}.yml"
     - name: setup pre codintions
       file:
         path: "{{ item }}"

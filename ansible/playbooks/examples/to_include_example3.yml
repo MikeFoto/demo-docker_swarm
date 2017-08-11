@@ -1,3 +1,5 @@
+################################################################################
+#  swarm_run Role
 swarm_aux3:                              # aux values used in configuration
   exposed_ports:
     microservice1:   9080
@@ -75,4 +77,5 @@ swarm_run3:                              # microservice  example
           --replicas 2
           --publish {{ swarm_aux.exposed_ports.nginx2 }}:80
 
-
+# END swarm_run  Role
+################################################################################

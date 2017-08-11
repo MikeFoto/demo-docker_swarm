@@ -41,11 +41,16 @@ vagrant up
 * Update the cluster (Optional)
 to add nodes just edit the file *hosts.yaml* and run the command again.
 
-* Launch defined services
+# Launch defined services
+There is one examples directory . Choose one by number .
+
+
 ```bash
+export EX_NUM="<some_example_configuration_filenumber_in_examples_directory>"
 ansible-playbook  \
   -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
   --extra-vars='swarm_manager_ip=192.168.33.20' \
+  --extra-vars='example_number=$EX_NUM' \
    ansible/playbooks/swarm_run.yml
 ```
 All services are defined using ansible_docker_swarm role. Check examples
