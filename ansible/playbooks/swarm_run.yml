@@ -23,6 +23,8 @@
       with_items:
         - "{{ swarm_run.preconditions.directories }}"
       when:
+        swarm_run                            is defined and
+        swarm_run.preconditions              is defined and
         swarm_run.preconditions.directories  is defined
 
 # Provision Manager

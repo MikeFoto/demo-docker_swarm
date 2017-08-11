@@ -15,7 +15,7 @@ Change to any other provisioner by changing configuration file
 
 * change hosts.yml with your desired configuration . In each node #Cpus, memory and role can be configured
 
-* One private network is used (192.168.33.0/24 ). Change it if conflicts with existing ones.
+* One private network is used (192.168.33.0/24 ). Change it (on Vagrantfile and hosts.yaml ) if conflicts with existing ones.
 
 # Dependencies
 
@@ -39,7 +39,7 @@ vagrant up
 ```
 
 * Update the cluster (Optional)
-to add nodes just edit the file *hosts.yaml*
+to add nodes just edit the file *hosts.yaml* and run the command again.
 
 * Launch defined services
 ```bash
