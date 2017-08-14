@@ -27,7 +27,7 @@ Change to any other provisioner by changing configuration file
 ** ansible_packages - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_packages.git
 ** ansible_firewalld - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_firewalld.git
 ** ansible_docker_ce_centos_install - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_ce_centos_install.git
-** ansible_docker_swarm_manager - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_manager.git
+** ansible_docker_swarm_leader - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_leader.git
 ** ansible_docker_swarm_node - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_node.git
 
 # Usage
