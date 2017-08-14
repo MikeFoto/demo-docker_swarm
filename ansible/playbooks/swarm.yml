@@ -22,7 +22,7 @@
 - hosts:
     - leader_group
   roles:
-     - ansible_docker_swarm_manager
+     - ansible_docker_swarm_leader
 
 #
 # Provision other managers and workers

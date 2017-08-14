@@ -30,12 +30,13 @@ swarm_run:                              # microservice  example
   services:
     start:
       - name:     demo_microservice_1
-        image:    python
+        image:    python                   # if this image and tag does not
+                                           #  exist it downloads it
         tag:      latest
         command: |
-          python -m http.server {{ swarm_aux.internal_ports.microservice2 | default("8081")}}
+          python -m http.server {{ swarm_aux.internal_ports.microservice1 }}
         options:
           --replicas 1
-          --publish {{ swarm_aux.exposed_ports.microservice2 | default("2001")}}:{{ swarm_aux.internal_ports.microservice2 | default("8081")}}
+          --publish {{ swarm_aux.exposed_ports.microservice1 }}:{{ swarm_aux.internal_ports.microservice1 }}
 # END swarm_run  Role
 ################################################################################
