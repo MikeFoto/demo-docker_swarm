@@ -25,3 +25,9 @@ manager3:
   :enabled:     true
   :playbook:    swarm.yml
   :swarm_role:  manager
+loadbalancer:
+  :ip:          192.168.33.25
+  :enabled:     true
+  :playbook:    lb.yml
+  :swarm_role:  load_balancer
+  :memory :     512

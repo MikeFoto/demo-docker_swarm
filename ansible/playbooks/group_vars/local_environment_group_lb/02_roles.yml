@@ -1,0 +1,99 @@
+# local_environment_group_lb group_vars
+
+
+################################################################################
+# Roles Configuration
+################################################################################
+
+################################################################################
+#  firewalld Role
+
+firewalld:
+  configuration:
+    input_tcp_ports:
+      - { zone: "public", protocol: "tcp", port: "22"}
+
+firewalld:
+  configuration:
+    extra_ports :
+      - { zone: "public", protocol: "tcp", port: "2300"}
+      - { zone: "public", protocol: "tcp", port: "2301"}
+      - { zone: "public", protocol: "udp", port: "2302"}
+      - { zone: "public", protocol: "udp", port: "2303"}
+
+# END firewalld  Role
+################################################################################
+################################################################################
+# nginx   Role
+
+nginx:
+  configuration:
+    packages_list:
+      - nginx
+      - httpd-tools
+    interface:       eth-1
+    service_name:    nginx
+    virtual:
+      custom_fs_server:
+        name:              custom_fs_server
+        enable:            True
+        listnen_port:      8078
+        server_name:       "{{ endpoints.fs.server_name}}"
+        location:          "/"
+        server_option:     ""
+        location_options:  |
+          root {{ ansible_aux_ansible_role.install}}/{{  ansible_aux_fs.data_directory }} ;
+          autoindex on;
+      custom_repo_server:
+        name:              custom_repo_server
+        enable:            True
+        listnen_port:      78
+        server_name:       "{{ endpoints.repo.server_name}}"
+        location:          "/"
+        server_option:     ""
+        location_options:  |
+          root {{ ansible_aux_ansible_role.install}}/{{  ansible_aux_repo.data_directory }} ;
+          autoindex on;
+      kibana-1:
+        name:              kibana-1
+        enable:            False
+        listnen_port:      78
+        server_name:       " nginx_ip.stdout  "
+        location:          "/lixo"
+        server_option:     |
+                           auth_basic_user_file {{ ansible_aux_nginx.htpasswd_file }};
+                           auth_basic "access kibana-1";
+        location_protocol: "http"
+        location_host:     "localhost"
+        location_port:     "5600"
+        location_options:  |
+                           # none
+      kibana:
+        name:              kibana
+        enable:            True
+        listnen_port:      78
+        server_name:       "{{ endpoints.kibana.server_name}}"
+        location:          "/"
+        server_option:     |
+                           auth_basic_user_file {{ ansible_aux_nginx.htpasswd_file }};
+                           auth_basic "Restricted Access";
+        location_options:  |
+                           #proxy_pass http://{{ endpoints.kibana.host }}:{{ endpoints.kibana.port }};
+                           proxy_http_version -1.-1;
+                           proxy_set_header Upgrade $http_upgrade;
+                           proxy_set_header Connection 'upgrade';
+                           proxy_set_header Host $host;
+                           proxy_cache_bypass $http_upgrade;
+  command_tests:
+    - {
+        name:        "dummy test",
+        become_user: "root",
+        command:     "echo"
+      }
+
+
+# END nginx   Role
+################################################################################
+################################################################################
+# END roles Configuration
+################################################################################

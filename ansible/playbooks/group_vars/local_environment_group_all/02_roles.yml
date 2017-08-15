@@ -1,4 +1,4 @@
-# local_environment group_vars
+# local_environment_group_all group_vars
 
 
 ################################################################################
@@ -12,22 +12,15 @@ packages:
   remove: []
     # - "libselinux-python"
   install:
-    - { name: "libselinux-python", state: "latest" }
-    - { name: "bind-utils",        state: "latest" }
+    - { name: "libselinux-python",   state: "latest" }
+    - { name: "selinux-policy-base", state: "latest" }
+    - { name: "bind-utils",          state: "latest" }
+    - { name: "net-tools",           state: "latest" }
+
 
 #
 # # END packages Role
 # ################################################################################
-################################################################################
-#  firewalld Role
-
-firewalld:
-  configuration:
-    input_tcp_ports:
-      - { zone: "public", protocol: "tcp", port: "22"}
-
-# END firewalld  Role
-################################################################################
 ################################################################################
 # repos  Role
 repos:

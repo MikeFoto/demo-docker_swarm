@@ -11,24 +11,37 @@ Change to any other provisioner by changing configuration file
 
 # Setup
 
-* change ansible.cfg to match your local setup
+* Change ansible.cfg to match your local setup
 
-* change hosts.yml with your desired configuration . In each node #Cpus, memory and role can be configured
+* Change hosts.yml with your desired configuration . In each node #Cpus, memory and role can be configured
 
 * One private network is used (192.168.33.0/24 ). Change it (on Vagrantfile and hosts.yaml ) if conflicts with existing ones.
+
+
+
+        ------------------------------------------ 192.168.33.0/24 network
+        |        |            |        |       |
+| manager1 | | manager2 | | manager3 | | worker1  | | worker2  |
+
+                                  ^
+                                  | ports :800X => :908x
+
+|           Vagrant                                            |
+
 
 # Dependencies
 
 * ansible_galaxy_roles - external dependencies from other contributors
-** hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
+  * hostnames Role created by Antti J. Salminen in 2014 (TODO: include URL).
 
 * My public roles
-** ansible_repos - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_repos.git
-** ansible_packages - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_packages.git
-** ansible_firewalld - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_firewalld.git
-** ansible_docker_ce_centos_install - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_ce_centos_install.git
-** ansible_docker_swarm_leader - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_leader.git
-** ansible_docker_swarm_node - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_node.git
+
+  * ansible_repos - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_repos.git
+  * ansible_packages - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_packages.git
+  * ansible_firewalld - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_firewalld.git
+  * ansible_docker_ce_centos_install - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_ce_centos_install.git
+  * ansible_docker_swarm_leader - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_leader.git
+  * ansible_docker_swarm_node - git clone https://MikeFoto@bitbucket.org/MikeFoto/ansible_docker_swarm_node.git
 
 # Usage
 
@@ -50,7 +63,7 @@ export EX_NUM="<some_example_configuration_filenumber_in_examples_directory>"
 ansible-playbook  \
   -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
   --extra-vars='swarm_manager_ip=192.168.33.20' \
-  --extra-vars='example_number=$EX_NUM' \
+  --extra-vars="example_number=$EX_NUM" \
    ansible/playbooks/swarm_run.yml
 ```
 All services are defined using ansible_docker_swarm role. Check examples

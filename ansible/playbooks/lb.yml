@@ -1,0 +1,7 @@
+#
+# Common Provision
+- hosts:
+    - all
+  roles:
+     - { role: ajsalminen.hosts } 
+     - { role: ansible_firewalld }

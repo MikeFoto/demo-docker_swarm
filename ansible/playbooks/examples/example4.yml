@@ -15,10 +15,10 @@ swarm_aux:                              # aux values used in configuration
 swarm_run:                              # microservice  example
   documentation: |
     pratical example of an microservice architecture with 4 service , 3 replicas for each
-  test:
-    - name:    test1      # basic testing to each service
-      command: |
-        curl --max-time 20 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.microservice1 }}
+  # test:
+  #   - name:    test1      # basic testing to each service
+  #     command: |
+  #       curl --max-time 20 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.microservice1 }}
     # - name:    test5     # sequential test in same service
     #   command: |
     #     NUMTEST=10000
@@ -32,11 +32,11 @@ swarm_run:                              # microservice  example
       - name:     demo_microservice_1
         image:    python                   # if this image and tag does not
                                            #  exist it downloads it
-        tag:      latest
+        tag:      latest                   # Image tag . If absent use latest 
         command: |
           python -m http.server {{ swarm_aux.internal_ports.microservice1 }}
         options:
-          --replicas 1
+          --replicas 2
           --publish {{ swarm_aux.exposed_ports.microservice1 }}:{{ swarm_aux.internal_ports.microservice1 }}
 # END swarm_run  Role
 ################################################################################

@@ -7,14 +7,7 @@
      - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
      - ansible_repos
      - ansible_packages
-     - { role: ansible_firewalld,
-         extra_ports : [
-           { zone: "public", protocol: "tcp", port: "2377"},
-           { zone: "public", protocol: "tcp", port: "7946"},
-           { zone: "public", protocol: "udp", port: "7946"},
-           { zone: "public", protocol: "udp", port: "4789"}
-         ]
-        }
+     - { role: ansible_firewalld }
      - ansible_docker_ce_centos_install
 
 #

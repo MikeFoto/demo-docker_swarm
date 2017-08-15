@@ -52,9 +52,17 @@ Vagrant.configure("2") do |config|
           swarm_role: "#{host[:swarm_role]}"
        }
        ansible.groups = {
-         "local_environment" => [ "manager1","manager2",
-                                  "worker1","worker2","manager3"
-                                ] ,
+         # all hosts in the environment
+         "local_environment_group_all"   => [
+                                              "manager1","manager2", "manager3",
+                                              "worker1","worker2",
+                                              "loadbalancer"
+                                            ] ,
+         "local_environment_group_lb"    => [ "loadbalancer"],
+         "local_environment_group_swarn" => [
+                                              "manager1","manager2", "manager3",
+                                              "worker1","worker2"
+                                            ] ,
          "leader_group"      => ["manager1"] ,
          "manager_group"     => ["manager1","manager2","manager3"] ,
          "others_group"      => ["manager2","manager3","worker1","worker2"] ,

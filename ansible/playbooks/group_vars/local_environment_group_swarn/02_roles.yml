@@ -1,0 +1,28 @@
+# local_environment_group_swarn group_vars
+
+
+################################################################################
+# Roles Configuration
+################################################################################
+################################################################################
+#  firewalld Role
+
+firewalld:
+  configuration:
+    input_tcp_ports:
+      - { zone: "public", protocol: "tcp", port: "22"}
+
+firewalld:
+  configuration:
+    extra_ports :
+      - { zone: "public", protocol: "tcp", port: "2376"}
+      - { zone: "public", protocol: "tcp", port: "7945"}
+      - { zone: "public", protocol: "udp", port: "7945"}
+      - { zone: "public", protocol: "udp", port: "4788"}
+
+# END firewalld  Role
+################################################################################
+
+################################################################################
+# END roles Configuration
+################################################################################
