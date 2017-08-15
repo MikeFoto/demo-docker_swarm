@@ -47,17 +47,17 @@ Vagrant.configure("2") do |config|
             { address: "192.168.33.21", hostnames: [ "manager2.swarm","manager2" ] },
             { address: "192.168.33.22", hostnames: [ "worker1.swarm","worker1" ] },
             { address: "192.168.33.23", hostnames: [ "worker2.swarm","worker2" ] },
-            { address: "192.168.33.24", hostnames: [ "worker3.swarm","worker3" ] }
+            { address: "192.168.33.24", hostnames: [ "manager3.swarm","manager3" ] }
           ],
           swarm_role: "#{host[:swarm_role]}"
        }
        ansible.groups = {
          "local_environment" => [ "manager1","manager2",
-                                  "worker1","worker2","worker3"
+                                  "worker1","worker2","manager3"
                                 ] ,
          "leader_group"      => ["manager1"] ,
-         "manager_group"     => ["manager1","manager2"] ,
-         "others_group"      => ["manager2","worker1","worker2","worker3"] ,
+         "manager_group"     => ["manager1","manager2","manager3"] ,
+         "others_group"      => ["manager2","manager3","worker1","worker2"] ,
        }
       end
     end

@@ -20,8 +20,8 @@ worker2:
   :enabled:     true
   :playbook:    swarm.yml
   :swarm_role:  worker
-worker3:
+manager3:
   :ip:          192.168.33.24
   :enabled:     true
   :playbook:    swarm.yml
-  :swarm_role:  worker
+  :swarm_role:  manager
