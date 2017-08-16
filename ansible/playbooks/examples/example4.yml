@@ -32,9 +32,9 @@ swarm_run:                              # microservice  example
       - name:     demo_microservice_1
         image:    python                   # if this image and tag does not
                                            #  exist it downloads it
-        tag:      latest                   # Image tag . If absent use latest 
+        tag:      latest                   # Image tag . If absent use latest
         command: |
-          python -m http.server {{ swarm_aux.internal_ports.microservice1 }}
+          python -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice1 }}
         options:
           --replicas 2
           --publish {{ swarm_aux.exposed_ports.microservice1 }}:{{ swarm_aux.internal_ports.microservice1 }}

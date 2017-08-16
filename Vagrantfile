@@ -40,6 +40,7 @@ Vagrant.configure("2") do |config|
         ansible.playbook = "ansible/playbooks/#{host[:playbook]}"
         ansible.sudo     = true
         ansible.extra_vars = {
+          swarm_network:                "192.168.33.0/24",
           swarm_manager_ip:             "192.168.33.20",
           swarm_manager_inventory_name: "manager1",
           hosts_additional_hosts: [
@@ -59,7 +60,7 @@ Vagrant.configure("2") do |config|
                                               "loadbalancer"
                                             ] ,
          "local_environment_group_lb"    => [ "loadbalancer"],
-         "local_environment_group_swarn" => [
+         "local_environment_group_swarm" => [
                                               "manager1","manager2", "manager3",
                                               "worker1","worker2"
                                             ] ,

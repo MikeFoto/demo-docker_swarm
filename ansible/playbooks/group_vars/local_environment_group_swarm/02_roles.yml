@@ -1,4 +1,4 @@
-# local_environment_group_swarn group_vars
+# local_environment_group_swarm group_vars
 
 
 ################################################################################
@@ -9,16 +9,14 @@
 
 firewalld:
   configuration:
-    input_tcp_ports:
+    input_ports:
       - { zone: "public", protocol: "tcp", port: "22"}
-
-firewalld:
-  configuration:
-    extra_ports :
-      - { zone: "public", protocol: "tcp", port: "2376"}
-      - { zone: "public", protocol: "tcp", port: "7945"}
-      - { zone: "public", protocol: "udp", port: "7945"}
-      - { zone: "public", protocol: "udp", port: "4788"}
+      - { zone: "public",
+          protocol: "tcp",
+          port: "1-65535",
+          source: "{{ swarm_network }}"
+        }
+    extra_ports : []
 
 # END firewalld  Role
 ################################################################################

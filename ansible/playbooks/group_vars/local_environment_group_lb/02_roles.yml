@@ -10,16 +10,10 @@
 
 firewalld:
   configuration:
-    input_tcp_ports:
+    input_ports:
       - { zone: "public", protocol: "tcp", port: "22"}
-
-firewalld:
-  configuration:
     extra_ports :
-      - { zone: "public", protocol: "tcp", port: "2300"}
-      - { zone: "public", protocol: "tcp", port: "2301"}
-      - { zone: "public", protocol: "udp", port: "2302"}
-      - { zone: "public", protocol: "udp", port: "2303"}
+      - []
 
 # END firewalld  Role
 ################################################################################
