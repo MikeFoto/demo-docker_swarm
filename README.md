@@ -24,7 +24,6 @@ Change to any other provisioner by changing configuration file
 | manager1 | | manager2 | | manager3 | | worker1  | | worker2  |
 
                                   ^
-                                  | ports :800X => :908x
 
 |           Vagrant                                            |
 

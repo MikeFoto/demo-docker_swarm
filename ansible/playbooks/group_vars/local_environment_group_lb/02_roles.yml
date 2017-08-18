@@ -12,8 +12,7 @@ firewalld:
   configuration:
     input_ports:
       - { zone: "public", protocol: "tcp", port: "22"}
-    extra_ports :
-      - []
+    extra_ports : []
 
 # END firewalld  Role
 ################################################################################

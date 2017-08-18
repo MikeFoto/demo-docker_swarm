@@ -5,16 +5,15 @@ swarm_aux:                              # aux values used in configuration
     microservice1:   9080
     microservice2:   9081
     microservice3:   9082
-    microservice4:   9083
   internal_ports:
-    microservice1:   2000
-    microservice2:   2010
-    microservice3:   2020
-    microservice4:   2030
+    microservice1:   8000
+    microservice2:   8010
+    microservice3:   8020
 
 swarm_run:                              # microservice  example
   documentation: |
-    pratical example of an microservice architecture with 4 service , 3 replicas for each
+    Example of an microservice architecture with 3 services ,
+    2 replicas for each.
   # test:
   #   - name:    test1      # basic testing to each service
   #     command: |
@@ -30,13 +29,28 @@ swarm_run:                              # microservice  example
   services:
     start:
       - name:     demo_microservice_1
-        image:    python                   # if this image and tag does not
-                                           #  exist it downloads it
-        tag:      latest                   # Image tag . If absent use latest
+        image:    python
+        tag:      latest
         command: |
-          python -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice1 }}
+          /usr/bin/python2.7 -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice1 }}
         options:
           --replicas 2
           --publish {{ swarm_aux.exposed_ports.microservice1 }}:{{ swarm_aux.internal_ports.microservice1 }}
+      - name:     demo_microservice_2
+        image:    python
+        tag:      latest
+        command: |
+          /usr/bin/python2.7 -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice2 }}
+        options:
+          --replicas 2
+          --publish {{ swarm_aux.exposed_ports.microservice2 }}:{{ swarm_aux.internal_ports.microservice2 }}
+      - name:     demo_microservice_3
+        image:    python
+        tag:      latest
+        command: |
+          /usr/bin/python2.7 -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice3 }}
+        options:
+          --replicas 2
+          --publish {{ swarm_aux.exposed_ports.microservice3 }}:{{ swarm_aux.internal_ports.microservice3 }}
 # END swarm_run  Role
 ################################################################################
