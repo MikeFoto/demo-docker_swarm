@@ -4,7 +4,7 @@ manager1:
   :playbook:    swarm.yml
   :swarm_role:  leader
   :cpu:         1
-  :memory :     1024
+  :memory :     512
 manager2:
   :ip:          192.168.33.21
   :enabled:     true
@@ -30,4 +30,3 @@ loadbalancer:
   :enabled:     true
   :playbook:    lb.yml
   :swarm_role:  load_balancer
-  :memory :     512

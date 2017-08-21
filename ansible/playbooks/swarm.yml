@@ -4,10 +4,10 @@
     - leader_group
     - others_group
   roles:
-     - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
-     - ansible_repos
      - ansible_packages
-     - { role: ansible_firewalld }
+     - ansible_repos
+     - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
+     # - { role: ansible_firewalld }
      - ansible_docker_ce_centos_install
 
 #

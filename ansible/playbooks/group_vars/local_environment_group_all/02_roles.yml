@@ -8,14 +8,30 @@
 # ################################################################################
 # #  packages Role
 packages:
-  upgrade: False
-  remove: []
-    # - "libselinux-python"
-  install:
-    - { name: "libselinux-python",   state: "latest" }
-    - { name: "selinux-policy-base", state: "latest" }
-    - { name: "bind-utils",          state: "latest" }
-    - { name: "net-tools",           state: "latest" }
+  yum:
+    upgrade: False
+    remove: []
+      # - "libselinux-python"
+    install:
+      - { name: "libselinux-python",   state: "latest" }
+      - { name: "selinux-policy-base", state: "latest" }
+      - { name: "bind-utils",          state: "latest" }
+      - { name: "net-tools",           state: "latest" }
+  apt:
+    remove:
+      - "some-stupid-package"
+    upgrade: False
+    install:
+      - { name: "wget",   state: "latest" }
+  tests:
+    - {
+        name: test1,
+        command: "echo 'test1 succeed' "
+      }
+    - {
+        name: test2,
+        command: "echo 'test2 succeed' "
+      }
 
 
 #

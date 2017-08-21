@@ -30,11 +30,12 @@ swarm_run:                              # microservice  example
     start:
       - name:     demo_microservice_1
         image:    python
-        tag:      latest
+        tag:      latest                     # optional image tag
         command: |
           /usr/bin/python2.7 -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice1 }}
         options:
           --replicas 2
+          --detach=false
           --publish {{ swarm_aux.exposed_ports.microservice1 }}:{{ swarm_aux.internal_ports.microservice1 }}
       - name:     demo_microservice_2
         image:    python
@@ -43,6 +44,7 @@ swarm_run:                              # microservice  example
           /usr/bin/python2.7 -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice2 }}
         options:
           --replicas 2
+          --detach=false
           --publish {{ swarm_aux.exposed_ports.microservice2 }}:{{ swarm_aux.internal_ports.microservice2 }}
       - name:     demo_microservice_3
         image:    python
@@ -51,6 +53,7 @@ swarm_run:                              # microservice  example
           /usr/bin/python2.7 -m  SimpleHTTPServer {{ swarm_aux.internal_ports.microservice3 }}
         options:
           --replicas 2
+          --detach=false
           --publish {{ swarm_aux.exposed_ports.microservice3 }}:{{ swarm_aux.internal_ports.microservice3 }}
 # END swarm_run  Role
 ################################################################################

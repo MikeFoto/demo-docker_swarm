@@ -7,6 +7,8 @@ require 'yaml'
 
 DEFAULTS = {
   :base_image      => 'centos/7',
+  #:base_image      => 'centos/6',
+  #:base_image      => 'ubuntu/trusty64',
   :cpu             => 1,
   :memory          => 1024,
   :enabled         => false,
