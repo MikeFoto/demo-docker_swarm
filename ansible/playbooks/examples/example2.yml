@@ -58,5 +58,11 @@ swarm_run:                              # microservice  example
           --replicas 2
           --publish {{ swarm_aux.exposed_ports.microservice3 }}:{{ swarm_aux.internal_ports.microservice3 }}
           --detach=false
+  volumes:                               # optional 
+    create:                              # volumes List to be created
+      - name:     demo_volume_1          # volume name
+        option:   "none"                 # Any option to volume creation can be specified here
+      - name:     demo_volume_2
+        option:   "none"
 # END swarm_run  Role
 ################################################################################
