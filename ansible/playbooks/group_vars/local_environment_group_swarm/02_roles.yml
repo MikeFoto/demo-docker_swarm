@@ -7,16 +7,16 @@
 ################################################################################
 #  firewalld Role
 
-firewalld:
-  configuration:
-    input_ports:
-      - { zone: "public", protocol: "tcp", port: "22"}
-      - { zone: "public",
-          protocol: "tcp",
-          port: "1-65535",
-          source: "{{ swarm_network }}"
-        }
-    extra_ports : []
+# firewalld:
+#   configuration:
+#     input_ports:
+#       - { zone: "public", protocol: "tcp", port: "22"}
+#       - { zone: "public",
+#           protocol: "tcp",
+#           port: "1-65535",
+#           source: "{{ swarm_network }}"
+#         }
+#     extra_ports : []
 
 # END firewalld  Role
 ################################################################################

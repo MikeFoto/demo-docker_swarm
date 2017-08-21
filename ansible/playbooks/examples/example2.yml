@@ -20,11 +20,11 @@ swarm_run:                              # microservice  example
                           # running
     - name:    test1      # basic testing to service1
       command: |
-        curl --max-time 20 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.microservice1 }}
+        curl --max-time 2 {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.microservice1 }}
     - name:    test2     # sequential test in same service
       command: |
         NUMTEST=100
-        TIMEOUT="0.1"
+        TIMEOUT=0.1
         for i in {1..$NUMTEST}
         do
           curl --max-time $TIMEOUT {{ swarm_manager_ip }}:{{ swarm_aux.exposed_ports.microservice1  }}
@@ -58,7 +58,7 @@ swarm_run:                              # microservice  example
           --replicas 2
           --publish {{ swarm_aux.exposed_ports.microservice3 }}:{{ swarm_aux.internal_ports.microservice3 }}
           --detach=false
-  volumes:                               # optional 
+  volumes:                               # optional
     create:                              # volumes List to be created
       - name:     demo_volume_1          # volume name
         option:   "none"                 # Any option to volume creation can be specified here

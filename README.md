@@ -6,8 +6,8 @@
 
 # Notes
 
-Current Vagrant file use virtualbox provisioner for demo purposes .
-Change to any other provisioner by changing configuration file
+* Current Vagrant file use virtualbox provisioner for demo purposes . Change to any other provisioner by changing configuration file
+* When running the swarm fot the first time it can take a while to download all necessary images to the nodes.
 
 # Setup
 

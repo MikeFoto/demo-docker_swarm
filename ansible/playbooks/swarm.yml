@@ -7,7 +7,7 @@
      - ansible_packages
      - ansible_repos
      - { role: ajsalminen.hosts } #, hosts_additional_hosts:  add_hosts | default ([]) }
-     # - { role: ansible_firewalld }
+     # - ansible_firewalld
      - ansible_docker_ce_centos_install
 
 #

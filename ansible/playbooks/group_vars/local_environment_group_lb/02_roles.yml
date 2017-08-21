@@ -8,11 +8,11 @@
 ################################################################################
 #  firewalld Role
 
-firewalld:
-  configuration:
-    input_ports:
-      - { zone: "public", protocol: "tcp", port: "22"}
-    extra_ports : []
+# firewalld:
+#   configuration:
+#     input_ports:
+#       - { zone: "public", protocol: "tcp", port: "22"}
+#     extra_ports : []
 
 # END firewalld  Role
 ################################################################################
