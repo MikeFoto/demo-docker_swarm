@@ -1,4 +1,5 @@
 #!/bin/bash
+# GATLING_DIR="/home/miguel/local/bin/gatling-charts-highcharts-bundle-2.2.5"  IP=192.168.33.20 PORT_RANGE='9080 9081 9082' OUT_DIR=/tmp/lixo1 ./gatling_test.sh
 
 function finish  {
   cd $GATLING_DIR
@@ -79,10 +80,11 @@ setup
 
 export DELAY=0
 #export USERS=15
-for USERS in 1 5
+#for USERS in 1 5 10
+for USERS in 15 20 25 30 35 40 50
 do
   #export PAGES=10
-  for PAGES in 1 5
+  for PAGES in 500 1000 2000 4000
   do
     for PORT in $PORT_RANGE
     do

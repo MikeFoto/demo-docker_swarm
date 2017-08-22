@@ -69,7 +69,7 @@ All services are defined using ansible_docker_swarm role. Check examples
 
 # License
 
-MIT
+GPL 3.0
 
 # Author Information
 
